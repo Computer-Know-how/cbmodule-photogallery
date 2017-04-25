@@ -49,7 +49,7 @@ component extends="coldbox.system.Interceptor" {
 		var prc = controller.getRequestService().getContext().getCollection(private=true);
 
 		if( isPhotoGallery( prc.fbCurrentRoot ) ) {
-			appendToBuffer('<div class="alert alert-error"><strong>This folder is setup as a photo gallery.</strong>  Any photos that are added to this folder will be processed by the "Photo Gallery" module.  Uploads may appear to stop at 100% while the photos are resized and cropped (especially with larger file sizes).  Please be patient while we do all sorts of cool things behind the scenes!</div>');
+			appendToBuffer('<div class="alert alert-danger"><strong>This folder is setup as a photo gallery.</strong>  Any photos that are added to this folder will be processed by the "Photo Gallery" module.  Uploads may appear to stop at 100% while the photos are resized and cropped (especially with larger file sizes).  Please be patient while we process the files!</div>');
 		}
 	}
 

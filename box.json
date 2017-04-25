@@ -1,0 +1,8 @@
+{
+	"location": "https://github.com/Computer-Know-how/cbmodule-photogallery/raw/master/cbmodule-photogallery.zip",
+	"name": "Photo Gallery",
+	"packageDirectory": "photoGallery",
+	"slug": "cbmodule-photogallery",
+	"type": "contentbox-modules",
+	"version": "1.1"
+}

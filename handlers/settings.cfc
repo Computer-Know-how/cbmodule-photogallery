@@ -82,7 +82,7 @@ component extends="base" {
 		// Flush the settings cache so our new settings are reflected
 		settingService.flushSettingsCache();
 
-		getPlugin("MessageBox").info("Settings Saved & Updated!");
+		getInstance("messageBox@cbMessageBox").info("Settings Saved & Updated!");
 		cb.setNextModuleEvent("PhotoGallery","settings.index");
 	}
 

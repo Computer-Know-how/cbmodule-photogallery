@@ -9,7 +9,7 @@ component{
 		var prc = event.getCollection(private=true);
 
 		// Get module root
-		prc.moduleRoot = getModuleSettings( "PhotoGallery" ).mapping;
+		prc.moduleRoot = event.getModuleRoot( "photoGallery" );
 
 		// Exit points
 		prc.xehGalleries = "gallery.index";

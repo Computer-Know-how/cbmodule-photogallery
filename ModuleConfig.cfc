@@ -5,17 +5,17 @@
 component {
 
 	// Module Properties
-	this.title 				= "PhotoGallery";
+	this.title 				= "Photo Gallery";
 	this.author 			= "Computer Know How, LLC";
 	this.webURL 			= "http://www.compknowhow.com";
 	this.description 		= "A photo gallery for your ContentBox website";
-	this.version			= "1.0";
+	this.version			= "1.1";
 	// If true, looks for views in the parent first, if not found, then in the module. Else vice-versa
 	this.viewParentLookup 	= true;
 	// If true, looks for layouts in the parent first, if not found, then in module. Else vice-versa
 	this.layoutParentLookup = true;
 	// Module Entry Point
-	this.entryPoint			= "PhotoGallery";
+	this.entryPoint			= "photoGallery";
 
 	function configure(){
 

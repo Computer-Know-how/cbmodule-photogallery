@@ -1,21 +1,7 @@
 /**
 * A widget that renders a gallery of the photos in a folder.
-
-All widgets inherit the following properties available to you:
-
-property name="categoryService"			inject="id:categoryService@cb";
-property name="entryService"			inject="id:entryService@cb";
-property name="pageService"				inject="id:pageService@cb";
-property name="contentService"			inject="id:contentService@cb";
-property name="contentVersionService"	inject="id:contentVersionService@cb";
-property name="authorService"			inject="id:authorService@cb";
-property name="commentService"			inject="id:commentService@cb";
-property name="customHTMLService"		inject="id:customHTMLService@cb";
-property name="cb"						inject="id:CBHelper@cb";
-property name="securityService" 		inject="id:securityService@cb";
-property name="html"					inject="coldbox:plugin:HTMLHelper";
 */
-component extends="contentbox.model.ui.BaseWidget" singleton{
+component extends="contentbox.models.ui.BaseWidget" singleton{
 
 	property name="settingService" 	inject="settingService@cb";
 
@@ -24,13 +10,13 @@ component extends="contentbox.model.ui.BaseWidget" singleton{
 		super.init(controller);
 
 		// Widget Properties
-		setPluginName("PhotoGallery");
-		setPluginVersion("1.0");
-		setPluginDescription("A widget that renders a gallery of the photos in a folder.");
+		setName("PhotoGallery");
+		setVersion("1.1");
+		setDescription("A widget that renders a gallery of the photos in a folder.");
 		setForgeBoxSlug("cbwidget-photogallery");
-		setPluginAuthor("Computer Know How");
-		setPluginAuthorURL("http://www.compknowhow.com");
-		setIcon( "image.png" );
+		setAuthor("Computer Know How, LLC");
+		setAuthorURL("http://www.compknowhow.com");
+		setIcon( "image" );
 		setCategory( "Utilities" );
 		return this;
 	}
