@@ -21,7 +21,7 @@
 						<ul class="galleryFolderTree" style="padding: 0">
 							<cfloop query="prc.contentFolders">
 								<li>
-									<cfset folder = replace(lcase(ReplaceNoCase(replace(Path,"\","/","all"), prc.mediaRoot, "")),"\","/","all")>
+									<cfset folder = lcase(ReplaceNoCase(replace(Path,"\","/","all"), replace(prc.mediaRoot,"\","/","all"), ""))>
 
 									<cfif folder contains prc.conventionGalleryPath>
 										<input type="checkbox" name="galleryFolders" value="#folder#" checked disabled> <strong>#folder#**</strong>
