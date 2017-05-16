@@ -35,13 +35,13 @@ component extends="contentbox.models.ui.BaseWidget" singleton{
 
 		param name="rc.startRow" default=1;
 
-		var galleryFolder = arguments.folder;
 		var relativePath = "";
 		var cbSettings = event.getValue(name="cbSettings",private=true);
 		var sortOrder = arguments.sort & " " & arguments.order;
 		var mediaRoot = expandPath(cbSettings.cb_media_directoryRoot);
-		var mediaPath = "modules" & cbSettings.cb_media_directoryRoot & "/" & galleryFolder;
+		var mediaPath = "modules" & cbSettings.cb_media_directoryRoot & "/" & arguments.folder;
 		var mediaPathExpanded = expandPath(mediaPath);
+		var galleryPath = event.buildLink("__media/#arguments.folder#/_photogallery");
 
 		if(!len(arguments.folder)){
 			return "Please specify a folder";
@@ -135,8 +135,8 @@ component extends="contentbox.models.ui.BaseWidget" singleton{
 			for (var x=startRow; (x lte startRow + maxRows - 1) and (x lte galleryPhotos.recordcount); x++) {
 				writeOutput('
 					<div class="cb-photogallery-tile">
-						<a href="#mediaPath#/_photogallery/normal/#galleryPhotos.name[x]#" title="#galleryPhotos.name[x]#" class="cb-photogallery-link">
-							<img src="#mediaPath#/_photogallery/small/#galleryPhotos.name[x]#" title="#galleryPhotos.name[x]#" alt="#galleryPhotos.name[x]#" class="cb-photogallery-image" rel="group">
+						<a href="#galleryPath#/normal/#galleryPhotos.name[x]#" title="#galleryPhotos.name[x]#" class="cb-photogallery-link">
+							<img src="#galleryPath#/small/#galleryPhotos.name[x]#" title="#galleryPhotos.name[x]#" alt="#galleryPhotos.name[x]#" class="cb-photogallery-image" rel="group">
 						</a>
 					</div>
 				');
