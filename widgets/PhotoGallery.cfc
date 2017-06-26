@@ -39,7 +39,7 @@ component extends="contentbox.models.ui.BaseWidget" singleton{
 		var cbSettings = event.getValue(name="cbSettings",private=true);
 		var sortOrder = arguments.sort & " " & arguments.order;
 		var mediaRoot = expandPath(cbSettings.cb_media_directoryRoot);
-		var mediaPath = "modules" & cbSettings.cb_media_directoryRoot & "/" & arguments.folder;
+		var mediaPath = cbSettings.cb_media_directoryRoot & "/" & arguments.folder;
 		var mediaPathExpanded = expandPath(mediaPath);
 		var galleryPath = event.buildLink("__media/#arguments.folder#/_photogallery");
 
