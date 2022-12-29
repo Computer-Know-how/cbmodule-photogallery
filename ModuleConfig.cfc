@@ -66,7 +66,7 @@ component {
 	function onLoad(){
 		// ContentBox loading
 		if( structKeyExists( controller.getSetting("modules"), "contentbox" ) ){
-			var menuService = controller.getWireBox().getInstance("AdminMenuService@cb");
+			var menuService = controller.getWireBox().getInstance("AdminMenuService@contentbox");
 
 			// Add the 'Photo Gallery' contribution to the module menu
 			menuService.addSubMenu(topMenu=menuService.MODULES,name="PhotoGallery",label="Photo Gallery",href="#menuService.buildModuleLink('PhotoGallery','gallery.index')#");
@@ -77,7 +77,7 @@ component {
 	* Fired when the module is activated
 	*/
 	function onActivate(){
-		var settingService = controller.getWireBox().getInstance("SettingService@cb");
+		var settingService = controller.getWireBox().getInstance("SettingService@contentbox");
 
 		// Store default settings
 		var findArgs = {name="photo_gallery"};
@@ -98,7 +98,7 @@ component {
 	function onUnload(){
 		// ContentBox unloading
 		if( structKeyExists( controller.getSetting("modules"), "contentbox" ) ){
-			var menuService = controller.getWireBox().getInstance("AdminMenuService@cb");
+			var menuService = controller.getWireBox().getInstance("AdminMenuService@contentbox");
 
 			// Remove the 'Photo Gallery' contribution from the module menu
 			menuService.removeSubMenu(topMenu=menuService.MODULES,name="PhotoGallery");
@@ -109,7 +109,7 @@ component {
 	* Fired when the module is deactivated by ContentBox Only
 	*/
 	function onDeactivate(){
-		var settingService = controller.getWireBox().getInstance("SettingService@cb");
+		var settingService = controller.getWireBox().getInstance("SettingService@contentbox");
 
 		var args = {name="photo_gallery"};
 		var setting = settingService.findWhere(criteria=args);

@@ -3,7 +3,7 @@
 */
 component extends="contentbox.models.ui.BaseWidget" singleton{
 
-	property name="settingService" 	inject="settingService@cb";
+	property name="settingService" 	inject="settingService@contentbox";
 
 	PhotoGallery function init(controller){
 		// super init
@@ -51,7 +51,7 @@ component extends="contentbox.models.ui.BaseWidget" singleton{
 			return "The folder specified does not exist";
 		}
 
-		//security check - can't be higher then the media root
+		//security check - can't be higher than the media root
 		if(!findNoCase(mediaRoot, mediaPathExpanded)){
 			return "This widget is restricted to the ContentBox media root.  All photo galleries must be contained within that directory.";
 		}

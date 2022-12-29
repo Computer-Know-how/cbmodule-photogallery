@@ -11,8 +11,8 @@ Description:  Photo gallery interceptor
 component extends="coldbox.system.Interceptor" {
 
 	// DI
-	property name="cbSettingService" inject="id:settingService@cb";
-	property name="settingService" inject="settingService@cb";
+	property name="cbSettingService" inject="id:settingService@contentbox";
+	property name="settingService" inject="settingService@contentbox";
 	property name="controller" inject="coldbox";
 
 	//after a file is uploaded resize and crop into the _photogallery folders

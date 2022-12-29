@@ -1,8 +1,8 @@
 component extends="base" {
 
 	// DI
-	property name="settingService" 	inject="settingService@cb";
-	property name="cb" 				inject="cbHelper@cb";
+	property name="settingService" 	inject="settingService@contentbox";
+	property name="cb" 				inject="cbHelper@contentbox";
 
 	function index(event,rc,prc){
 		prc.settings = deserializeJSON(settingService.getSetting( "photo_gallery" ));
