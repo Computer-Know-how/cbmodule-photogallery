@@ -14,9 +14,10 @@ component extends="coldbox.system.Interceptor" {
 	property name="cbSettingService" inject="id:settingService@contentbox";
 	property name="settingService" inject="settingService@contentbox";
 	property name="controller" inject="coldbox";
+	property name="messagebox" inject="messagebox@cbMessagebox"; 
 
 	//after a file is uploaded resize and crop into the _photogallery folders
-	void function fb_postFileUpload(event,struct interceptData) {
+	void function fb_postFileUpload(event, struct interceptData) {
 		//if it is a photo gallery and a file we can handle process the file
 		if ( isPhotoGallery( interceptData.results.serverDirectory ) and ( isFileAllowed( interceptData.results.serverFileExt ) ) ) {
 			//create the thumbnail and photo files
@@ -25,7 +26,7 @@ component extends="coldbox.system.Interceptor" {
 	}
 
 	//after a filename modification replicate the name change in the _photogallery folders
-	void function fb_postFileRename(event,struct interceptData) {
+	void function fb_postFileRename(event, struct interceptData) {
 		//if it is a photo gallery
 		//TODO: we should be checking if it is a photo before we rename it
 		if ( isPhotoGallery( getDirectoryFromPath( interceptData.original ) ) ) {
@@ -35,7 +36,7 @@ component extends="coldbox.system.Interceptor" {
 	}
 
 	//after a folder is removed remove the files from the _photogallery folders
-	void function fb_postFileRemoval(event,struct interceptData) {
+	void function fb_postFileRemoval(event, struct interceptData) {
 		//if it is a photo gallery
 		//TODO: we should be checking if it is a photo before we delete it
 		if ( isPhotoGallery( getDirectoryFromPath( interceptData.path ) ) ) {
@@ -47,20 +48,19 @@ component extends="coldbox.system.Interceptor" {
 	//add a message box that tells them that this folder is a photo gallery folder
 	void function fb_preFileListing(event, struct interceptData) {
 		var prc = controller.getRequestService().getContext().getCollection(private=true);
-
+		var interceptDataList = structKeyList(interceptData);
 		if( isPhotoGallery( prc.fbCurrentRoot ) ) {
-			appendToBuffer('<div class="alert alert-danger"><strong>This folder is setup as a photo gallery.</strong>  Any photos that are added to this folder will be processed by the "Photo Gallery" module.  Uploads may appear to stop at 100% while the photos are resized and cropped (especially with larger file sizes).  Please be patient while we process the files!</div>');
+			messageBox.info('This folder is setup as a photo gallery. Any photos that are added to this folder will be processed by the "Photo Gallery" module.  Uploads may appear to stop at 100% while the photos are resized and cropped (especially with larger file sizes).  Please be patient while we process the files!');
 		}
 	}
 
 	//remove the "_photogallery" folder from view (make it hidden)
-	void function fb_postDirectoryRead(event,struct interceptData) {
+	void function fb_postDirectoryRead(event, struct interceptData) {
 		if( isPhotoGallery( interceptData.directory ) ) {
 			//filter out our "_photogallery" folder from the original directory listing
 			var query = new Query();
 			query.setAttributes(directoryListing = interceptData.listing);
 			var filteredDirectory = query.execute(sql="select * from directoryListing where name <> '_photogallery'", dbtype="query");
-
 			var prc = controller.getRequestService().getContext().getCollection(private=true);
 			prc.fbqListing = filteredDirectory.getResult();
 		}

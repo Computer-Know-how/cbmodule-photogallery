@@ -83,8 +83,12 @@ component extends="contentbox.models.ui.BaseWidget" singleton{
 						box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
 						position: relative;
 						width: 150px;
-						margin: 0 20px 20px 0;
+						margin: 0 15px 20px 0;
 						background-color: ##fff;
+					}
+					
+					.cb-photogallery-newline {
+						clear: both;
 					}
 
 					.cb-photogallery-tile img {
@@ -131,10 +135,12 @@ component extends="contentbox.models.ui.BaseWidget" singleton{
 
 			var maxRows = settings.maxPhotosPerPage;
 			var startRow = rc.startRow;
+			var newline = "";
 
 			for (var x=startRow; (x lte startRow + maxRows - 1) and (x lte galleryPhotos.recordcount); x++) {
+				newline = (x MOD 5) eq 1 ? "cb-photogallery-newline" : "";
 				writeOutput('
-					<div class="cb-photogallery-tile">
+					<div class="cb-photogallery-tile #newline#">
 						<a href="#galleryPath#/normal/#galleryPhotos.name[x]#" title="#galleryPhotos.name[x]#" class="cb-photogallery-link">
 							<img src="#galleryPath#/small/#galleryPhotos.name[x]#" title="#galleryPhotos.name[x]#" alt="#galleryPhotos.name[x]#" class="cb-photogallery-image" rel="group">
 						</a>
