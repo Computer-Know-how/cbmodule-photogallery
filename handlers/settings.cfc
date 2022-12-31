@@ -6,7 +6,8 @@ component extends="base" {
 
 	function index(event,rc,prc){
 		prc.settings = deserializeJSON(settingService.getSetting( "photo_gallery" ));
-
+		// new maxPhotosPerRow seeting
+		
 		event.setView("settings/index");
 	}
 
@@ -65,7 +66,8 @@ component extends="base" {
 		if(structKeyExists(rc,"maxPhotosPerPage")) {
 			incomingSettings = serializeJSON(
 				{
-					"maxPhotosPerPage" = rc.maxPhotosPerPage
+					"maxPhotosPerPage" = rc.maxPhotosPerPage,
+					"maxPhotosPerRow" = rc.maxPhotosPerRow,
 				}
 			);
 			newSettings = deserializeJSON(incomingSettings);

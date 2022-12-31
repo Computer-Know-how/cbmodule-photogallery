@@ -16,13 +16,13 @@
 
 					<div class="tabbable tabs-left">
 						<ul class="nav nav-tabs">
-							<li class="active"><a href="##images" data-toggle="tab"><i class="icon-picture"></i> Images</a></li>
+							<li class="active"><a href="##images" data-toggle="tab"><i class="fa fa-image"></i> Images</a></li>
 
-							<li><a href="##folders" data-toggle="tab"><i class="icon-folder-open"></i> Folders</a></li>
+							<li><a href="##folders" data-toggle="tab"><i class="fa fa-folder-open"></i> Folders</a></li>
 
-							<li><a href="##security" data-toggle="tab"><i class="icon-lock"></i> Security</a></li>
+							<li><a href="##security" data-toggle="tab"><i class="fa fa-lock"></i> Security</a></li>
 
-							<li><a href="##paging" data-toggle="tab"><i class="icon-sort-by-attributes"></i> Paging</a></li>
+							<li><a href="##paging" data-toggle="tab"><i class="fa fa-file-image"></i> Paging & Layout</a></li>
 						</ul>
 
 						<div class="tab-content">
@@ -32,7 +32,7 @@
 								#html.startFieldset(legend="<i class='icon-picture icon-large'></i> Images (Small)")#
 
 								<div class="alert alert-info clearfix">
-									<i class="icon-info-sign icon-large"></i>
+									<i class="fa fa-info-circle fa-lg fa-2x pull-left"></i>
 									Changing image sizes will not resize gallery images already processed.  Settings will take effect for all images going forward.
 								</div>
 
@@ -57,7 +57,7 @@
 								#html.startFieldset(legend="<i class='icon-picture icon-large'></i> Images (Normal)")#
 
 								<div class="alert alert-info clearfix">
-									<i class="icon-info-sign icon-large"></i>
+									<i class="fa fa-info-circle fa-lg fa-2x pull-left"></i>
 									Changing image sizes will not resize gallery images already processed.  Settings will take effect for all images going forward.
 								</div>
 
@@ -159,6 +159,10 @@
 
 								<div class="form-group">
 									#html.textField(name="maxPhotosPerPage", label="Max Photos Per Page:", value="#prc.settings.maxPhotosPerPage#", class="form-control")#
+								</div>
+								
+								<div class="form-group">
+									#html.textField(name="maxPhotosPerRow", label="Max Photos Per Row:", value="#prc.settings.maxPhotosPerRow ?: 0#", class="form-control")#
 								</div>
 
 								#html.endFieldSet()#
