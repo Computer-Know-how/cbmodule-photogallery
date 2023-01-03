@@ -3,8 +3,8 @@
 */
 component extends="base" {
 
-	property name="settingService" 	inject="settingService@cb";
-	property name="cb" 				inject="cbHelper@cb";
+	property name="settingService" 	inject="settingService@contentbox";
+	property name="cb" 				inject="cbHelper@contentbox";
 
 	function index(event,rc,prc){
 		var cbSettings = event.getValue(name="cbSettings",private=true);

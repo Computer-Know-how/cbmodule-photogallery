@@ -3,7 +3,7 @@
 */
 component extends="contentbox.models.ui.BaseWidget" singleton{
 
-	property name="settingService" 	inject="settingService@cb";
+	property name="settingService" 	inject="settingService@contentbox";
 
 	PhotoGallery function init(controller){
 		// super init
@@ -11,7 +11,7 @@ component extends="contentbox.models.ui.BaseWidget" singleton{
 
 		// Widget Properties
 		setName("PhotoGallery");
-		setVersion("1.1");
+		setVersion("2.0");
 		setDescription("A widget that renders a gallery of the photos in a folder.");
 		setForgeBoxSlug("cbwidget-photogallery");
 		setAuthor("Computer Know How, LLC");
@@ -51,13 +51,12 @@ component extends="contentbox.models.ui.BaseWidget" singleton{
 			return "The folder specified does not exist";
 		}
 
-		//security check - can't be higher then the media root
+		//security check - can't be higher than the media root
 		if(!findNoCase(mediaRoot, mediaPathExpanded)){
 			return "This widget is restricted to the ContentBox media root.  All photo galleries must be contained within that directory.";
 		}
 
 		var gallery = directoryList(mediaPathExpanded,false,"query",arguments.filter,sortOrder);
-
 		var query = new Query();
 		query.setAttributes(directoryListing = gallery);
 
@@ -66,6 +65,9 @@ component extends="contentbox.models.ui.BaseWidget" singleton{
 
 		var galleryFolders = qryGalleryFolders.getResult();
 		var galleryPhotos = qryGalleryPhotos.getResult();
+		
+		var settings = deserializeJSON(settingService.getSetting( "photo_gallery" ));
+		var imageWidth = settings.imageSize.small.resizeWidth;
 
 		// generate photo gallery
 		saveContent variable="rString"{
@@ -82,16 +84,20 @@ component extends="contentbox.models.ui.BaseWidget" singleton{
 						-moz-box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
 						box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
 						position: relative;
-						width: 150px;
-						margin: 0 20px 20px 0;
+						width: #imageWidth#px;
+						margin: 0 15px 20px 0;
 						background-color: ##fff;
+					}
+					
+					.cb-photogallery-newline {
+						clear: both;
 					}
 
 					.cb-photogallery-tile img {
 						display: block;
 						overflow: hidden;
 						position: relative;
-						width: 150px;
+						width: #imageWidth#px;
 						border-radius: 3px;
 					}
 
@@ -127,14 +133,18 @@ component extends="contentbox.models.ui.BaseWidget" singleton{
 
 			writeOutput('<div class="cb-photogallery"><div class="cb-photogallery-tiles">');
 
-			var settings = deserializeJSON(settingService.getSetting( "photo_gallery" ));
-
 			var maxRows = settings.maxPhotosPerPage;
-			var startRow = rc.startRow;
+			var maxPhotosPerRow = settings.maxPhotosPerRow;
+			var startRow = val(rc.startRow);
+			if (startRow lt 1){ startRow = 1; };
+			var newline = "";
 
 			for (var x=startRow; (x lte startRow + maxRows - 1) and (x lte galleryPhotos.recordcount); x++) {
+				if (maxPhotosPerRow gt 0){
+					newline = (x MOD maxPhotosPerRow) eq 1 ? "cb-photogallery-newline" : "";
+				}
 				writeOutput('
-					<div class="cb-photogallery-tile">
+					<div class="cb-photogallery-tile #newline#">
 						<a href="#galleryPath#/normal/#galleryPhotos.name[x]#" title="#galleryPhotos.name[x]#" class="cb-photogallery-link">
 							<img src="#galleryPath#/small/#galleryPhotos.name[x]#" title="#galleryPhotos.name[x]#" alt="#galleryPhotos.name[x]#" class="cb-photogallery-image" rel="group">
 						</a>

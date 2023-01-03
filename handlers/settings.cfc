@@ -1,12 +1,13 @@
 component extends="base" {
 
 	// DI
-	property name="settingService" 	inject="settingService@cb";
-	property name="cb" 				inject="cbHelper@cb";
+	property name="settingService" 	inject="settingService@contentbox";
+	property name="cb" 				inject="cbHelper@contentbox";
 
 	function index(event,rc,prc){
 		prc.settings = deserializeJSON(settingService.getSetting( "photo_gallery" ));
-
+		// new maxPhotosPerRow seeting
+		
 		event.setView("settings/index");
 	}
 
@@ -65,7 +66,8 @@ component extends="base" {
 		if(structKeyExists(rc,"maxPhotosPerPage")) {
 			incomingSettings = serializeJSON(
 				{
-					"maxPhotosPerPage" = rc.maxPhotosPerPage
+					"maxPhotosPerPage" = rc.maxPhotosPerPage,
+					"maxPhotosPerRow" = rc.maxPhotosPerRow,
 				}
 			);
 			newSettings = deserializeJSON(incomingSettings);
