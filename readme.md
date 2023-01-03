@@ -15,5 +15,6 @@ Download code and extract it to your ContentBox modules folder in the ContentBox
 
 Change Log
 -----------------
+* Version 2.0 - Updated for ContentBox 5.3
 * Version 1.1 - Updated for ContentBox 3
 * Version 1.0 - Initial Release
